@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trường PTNT Tiểu học & THCS Pà Vầy Sủ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1e3a8a',
+                            lightBlue: '#2563eb',
+                            red: '#dc2626',
+                            gold: '#f59e0b',
+                            bgLight: '#f8fafc'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Hover Dropdown Behavior for Desktop */
+        @media (min-width: 1024px) {
+            .group:hover .dropdown-menu {
+                display: block;
+                animation: fadeIn 0.2s ease-in-out;
+            }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans flex flex-col min-h-screen">
+
+    <!-- TOP HEADER / CONTACT BAR -->
+    <div class="bg-brand-blue text-white text-xs sm:text-sm py-2 px-4 shadow-inner">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1"><i class="fas fa-phone-alt text-brand-gold"></i> Hotline: Hỏi sếp Huỳnh </span>
+                <span class="hidden md:flex items-center gap-1"><i class="fas fa-envelope text-brand-gold"></i> Email: demo@edu.vn</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="hidden sm:inline"><i class="fas fa-clock text-brand-gold"></i> Giờ làm việc: 7:00 - 17:00 (Thứ 2 - Thứ 6)</span>
+                <div class="flex items-center gap-2">
+                    <a href="#" class="hover:text-brand-gold transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-brand-gold transition"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER & LOGO -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Logo & School Name -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 bg-brand-blue text-white rounded-full flex items-center justify-center font-bold text-xl sm:text-2xl shadow-md border-2 border-brand-gold">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-xl font-bold text-brand-blue uppercase leading-tight group-hover:text-brand-lightBlue transition">TRƯỜNG PTNT TH & THCS PÀ VẦY SỦ</h1>
+                    <p class="text-xs text-gray-500 font-medium">Tri thức - Trách nhiệm - Sáng tạo - Phát triển</p>
+                </div>
+            </a>
+
+            <!-- Search Bar & Mobile Toggle -->
+            <div class="flex items-center gap-3">
+                <div class="relative hidden md:block w-64">
+                    <input type="text" placeholder="Tìm kiếm tin tức, văn bản..." class="w-full text-sm pl-9 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-brand-lightBlue focus:ring-1 focus:ring-brand-lightBlue transition">
+                    <i class="fas fa-search absolute left-3 top-2.5 text-gray-400 text-sm"></i>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-gray-600 hover:text-brand-blue hover:bg-gray-100 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- MAIN NAVIGATION BAR -->
+        <nav class="bg-brand-blue text-white border-t border-blue-900 hidden lg:block">
+            <div class="max-w-7xl mx-auto px-4">
+                <ul class="flex items-center font-medium text-sm">
+                    <!-- 1. Trang chủ -->
+                    <li>
+                        <a href="#trang-chu" class="inline-block py-3.5 px-5 hover:bg-blue-800 transition font-semibold active bg-blue-800">
+                            <i class="fas fa-home mr-1"></i> Trang chủ
+                        </a>
+                    </li>
+
+                    <!-- 2. Văn bản (Dropdown) -->
+                    <li class="relative group">
+                        <a href="#van-ban" class="inline-flex items-center py-3.5 px-5 hover:bg-blue-800 transition">
+                            Văn bản <i class="fas fa-chevron-down text-xs ml-1.5 opacity-80"></i>
+                        </a>
+                        <div class="dropdown-menu hidden absolute left-0 w-56 bg-white text-gray-800 shadow-xl rounded-b-lg border-t-2 border-brand-red py-2 z-50">
+                            <a href="#van-ban-so" class="block px-4 py-2.5 hover:bg-blue-50 hover:text-brand-blue text-sm border-b border-gray-100 transition"><i class="fas fa-file-alt text-brand-blue mr-2"></i> Văn bản từ sở</a>
+                            <a href="#tuyen-sinh" class="block px-4 py-2.5 hover:bg-blue-50 hover:text-brand-blue text-sm transition"><i class="fas fa-user-plus text-brand-blue mr-2"></i> Tuyển sinh đầu cấp</a>
+                        </div>
+                    </li>
+
+                    <!-- 3. Chuyên môn (Dropdown) -->
+                    <li class="relative group">
+                        <a href="#chuyen-mon" class="inline-flex items-center py-3.5 px-5 hover:bg-blue-800 transition">
+                            Chuyên môn <i class="fas fa-chevron-down text-xs ml-1.5 opacity-80"></i>
+                        </a>
+                        <div class="dropdown-menu hidden absolute left-0 w-64 bg-white text-gray-800 shadow-xl rounded-b-lg border-t-2 border-brand-red py-2 z-50">
+                            <a href="to-chuyen-mon-1-2-3.html" class="block px-4 py-2.5 hover:bg-blue-50 hover:text-brand-blue text-sm border-b border-gray-100 transition"><i class="fas fa-users text-brand-blue mr-2"></i> Tổ 1-2-3</a>
+                            <a href="#to-45" class="block px-4 py-2.5 hover:bg-blue-50 hover:text-brand-blue text-sm border-b border-gray-100 transition"><i class="fas fa-users text-brand-blue mr-2"></i> Tổ 4-5</a>
+                            <a href="#to-khtn" class="block px-4 py-2.5 hover:bg-blue-50 hover:text-brand-blue text-sm border-b border-gray-100 transition"><i class="fas fa-atom text-brand-blue mr-2"></i> Tổ Khoa học tự nhiên</a>
+                            <a href="#to-tnxh" class="block px-4 py-2.5 hover:bg-blue-50 hover:text-brand-blue text-sm transition"><i class="fas fa-globe-asia text-brand-blue mr-2"></i> Tổ Tự nhiên xã hội</a>
+                        </div>
+                    </li>
+
+                    <!-- 4. Tin tức – sự kiện -->
+                    <li>
+                        <a href="#tin-tuc" class="inline-block py-3.5 px-5 hover:bg-blue-800 transition">
+                            Tin tức – sự kiện
+                        </a>
+                    </li>
+
+                    <!-- 5. Về nhà trường -->
+                    <li>
+                        <a href="#ve-nha-truong" class="inline-block py-3.5 px-5 hover:bg-blue-800 transition">
+                            Về nhà trường
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- MOBILE NAVIGATION DRAWER -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-blue-900 text-white border-t border-blue-800">
+            <div class="px-4 py-3 border-b border-blue-800">
+                <input type="text" placeholder="Tìm kiếm..." class="w-full text-sm px-3 py-2 text-gray-800 rounded-md focus:outline-none">
+            </div>
+            <ul class="divide-y divide-blue-800/50 text-sm">
+                <li><a href="#trang-chu" class="block px-4 py-3 hover:bg-blue-800"><i class="fas fa-home mr-2"></i> Trang chủ</a></li>
+                
+                <!-- Mobile Submenu: Văn bản -->
+                <li class="mobile-dropdown">
+                    <button class="w-full text-left px-4 py-3 flex justify-between items-center hover:bg-blue-800 focus:outline-none">
+                        <span><i class="fas fa-file-invoice mr-2"></i> Văn bản</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="mobile-sub-menu hidden bg-blue-950 px-6 py-2 space-y-2">
+                        <a href="#van-ban-so" class="block py-1.5 text-blue-200 hover:text-white">• Văn bản từ sở</a>
+                        <a href="#tuyen-sinh" class="block py-1.5 text-blue-200 hover:text-white">• Tuyển sinh đầu cấp</a>
+                    </div>
+                </li>
+
+                <!-- Mobile Submenu: Chuyên môn -->
+                <li class="mobile-dropdown">
+                    <button class="w-full text-left px-4 py-3 flex justify-between items-center hover:bg-blue-800 focus:outline-none">
+                        <span><i class="fas fa-book-reader mr-2"></i> Chuyên môn</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="mobile-sub-menu hidden bg-blue-950 px-6 py-2 space-y-2">
+                        <a href="#to-123" class="block py-1.5 text-blue-200 hover:text-white">• Tổ 1-2-3</a>
+                        <a href="#to-45" class="block py-1.5 text-blue-200 hover:text-white">• Tổ 4-5</a>
+                        <a href="#to-khtn" class="block py-1.5 text-blue-200 hover:text-white">• Tổ Khoa học tự nhiên</a>
+                        <a href="#to-tnxh" class="block py-1.5 text-blue-200 hover:text-white">• Tổ Tự nhiên xã hội</a>
+                    </div>
+                </li>
+
+                <li><a href="#tin-tuc" class="block px-4 py-3 hover:bg-blue-800"><i class="fas fa-newspaper mr-2"></i> Tin tức – sự kiện</a></li>
+                <li><a href="#ve-nha-truong" class="block px-4 py-3 hover:bg-blue-800"><i class="fas fa-school mr-2"></i> Về nhà trường</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- HERO / BANNER SECTION -->
+    <section id="trang-chu" class="relative bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 text-white py-16 lg:py-24 overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80');"></div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10 flex flex-col items-center text-center">
+            <span class="bg-brand-red text-white text-xs font-semibold uppercase px-3 py-1 rounded-full mb-4 shadow">Năm học 2026 - 2027</span>
+            <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 max-w-3xl leading-tight">Chào mừng đến với Trường PTNT TH & THCS PÀ VẦY SỦ</h2>
+            <p class="text-blue-100 text-base md:text-lg max-w-2xl mb-8 leading-relaxed">Nơi ươm mầm tài năng, xây dựng nhân cách và trang bị hành trang toàn diện cho thế hệ tương lai vững bước hội nhập.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#tuyen-sinh" class="bg-brand-gold hover:bg-amber-600 text-gray-900 font-bold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5">
+                    <i class="fas fa-user-graduate mr-2"></i> Thông tin tuyển sinh
+                </a>
+                <a href="#ve-nha-truong" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-lg border border-white/30 backdrop-blur-sm transition">
+                    Khám phá nhà trường
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT SECTION -->
+    <main class="max-w-7xl mx-auto px-4 py-10 flex-grow w-full space-y-12">
+        
+        <!-- STATS / OVERVIEW -->
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 -mt-16 relative z-20">
+            <div class="bg-white p-6 rounded-xl shadow-md border-b-4 border-brand-blue text-center">
+                <i class="fas fa-user-graduate text-3xl text-brand-blue mb-2"></i>
+                <div class="text-2xl sm:text-3xl font-extrabold text-gray-800">1,000+</div>
+                <div class="text-xs sm:text-sm text-gray-500 font-medium mt-1">Học sinh toàn trường</div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md border-b-4 border-brand-red text-center">
+                <i class="fas fa-chalkboard-teacher text-3xl text-brand-red mb-2"></i>
+                <div class="text-2xl sm:text-3xl font-extrabold text-gray-800">60+</div>
+                <div class="text-xs sm:text-sm text-gray-500 font-medium mt-1">Cán bộ & Giáo viên</div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md border-b-4 border-brand-gold text-center">
+                <i class="fas fa-award text-3xl text-brand-gold mb-2"></i>
+                <div class="text-2xl sm:text-3xl font-extrabold text-gray-800">98%</div>
+                <div class="text-xs sm:text-sm text-gray-500 font-medium mt-1">Học sinh khá giỏi</div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md border-b-4 border-emerald-600 text-center">
+                <i class="fas fa-school text-3xl text-emerald-600 mb-2"></i>
+                <div class="text-2xl sm:text-3xl font-extrabold text-gray-800">100%</div>
+                <div class="text-xs sm:text-sm text-gray-500 font-medium mt-1">Đạt chuẩn Quốc gia</div>
+            </div>
+        </section>
+
+        <!-- TWO COLUMN LAYOUT: TIN TỨC & VĂN BẢN -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- LEFT COLUMN: TIN TỨC - SỰ KIỆN (2 Cols) -->
+            <section id="tin-tuc" class="lg:col-span-2 space-y-6">
+                <div class="flex items-center justify-between border-b-2 border-brand-blue pb-2">
+                    <h3 class="text-xl font-bold text-brand-blue uppercase flex items-center gap-2">
+                        <i class="fas fa-newspaper text-brand-red"></i> Tin tức – Sự kiện nổi bật
+                    </h3>
+                    <a href="#" class="text-xs sm:text-sm font-semibold text-brand-lightBlue hover:underline">Xem tất cả <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+
+                <!-- Featured News Main -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                    <div class="md:flex">
+                        <div class="md:shrink-0 md:w-1/2">
+                            <img class="h-56 w-full object-cover md:h-full" src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80" alt="Lễ khai giảng">
+                        </div>
+                        <div class="p-6 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center gap-2 text-xs text-gray-500 mb-2">
+                                    <span class="bg-blue-100 text-brand-blue px-2 py-0.5 rounded font-semibold">Sự kiện</span>
+                                    <span><i class="far fa-calendar-alt"></i> 05/09/2026</span>
+                                </div>
+                                <h4 class="text-lg font-bold text-gray-900 hover:text-brand-blue transition cursor-pointer mb-2">
+                                    Lễ Khai giảng năm học mới 2026 - 2027 đầy khí thế và tự hào
+                                </h4>
+                                <p class="text-gray-600 text-sm line-clamp-3">
+                                    Sáng nay, hòa chung không khí hân hoan của hàng triệu học sinh trên cả nước, nhà trường đã tổ chức thành công Lễ Khai giảng năm học mới với sự tham dự đầy đủ của các thầy cô, phụ huynh và học sinh...
+                                </p>
+                            </div>
+                            <a href="#" class="mt-4 text-sm font-semibold text-brand-blue hover:text-brand-red transition inline-flex items-center">
+                                Đọc tiếp <i class="fas fa-chevron-right text-xs ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sub News List Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                        <span class="text-xs text-gray-400"><i class="far fa-calendar-alt"></i> 12/10/2026</span>
+                        <h5 class="font-bold text-gray-800 text-sm mt-1 hover:text-brand-blue transition line-clamp-2 cursor-pointer">
+                            Hội thi Giáo viên dạy giỏi cấp Trường chuyên đề Đổi mới phương pháp dạy học
+                        </h5>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                        <span class="text-xs text-gray-400"><i class="far fa-calendar-alt"></i> 10/10/2026</span>
+                        <h5 class="font-bold text-gray-800 text-sm mt-1 hover:text-brand-blue transition line-clamp-2 cursor-pointer">
+                            Hoạt động ngoại khóa: Tập huấn Kỹ năng sống & An toàn giao thông đường bộ
+                        </h5>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RIGHT COLUMN: VĂN BẢN & THÔNG BÁO (1 Col) -->
+            <section id="van-ban" class="space-y-6">
+                <div class="flex items-center justify-between border-b-2 border-brand-red pb-2">
+                    <h3 class="text-xl font-bold text-brand-red uppercase flex items-center gap-2">
+                        <i class="fas fa-file-signature"></i> Văn bản mới nhất
+                    </h3>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 divide-y divide-gray-100">
+                    <!-- Van ban item 1 -->
+                    <div id="van-ban-so" class="py-3 first:pt-0 last:pb-0 hover:bg-gray-50 p-2 rounded transition">
+                        <div class="flex items-start gap-3">
+                            <div class="bg-red-100 text-brand-red p-2 rounded-lg shrink-0">
+                                <i class="fas fa-file-pdf text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded font-medium">Văn bản từ sở</span>
+                                <a href="#" class="block font-semibold text-sm text-gray-800 hover:text-brand-blue transition mt-1">
+                                    CV 3420/SGDĐT về việc chỉ đạo nhiệm vụ trọng tâm năm học 2026 - 2027
+                                </a>
+                                <span class="text-xs text-gray-400 block mt-1"><i class="far fa-clock"></i> Ngày ban hành: 15/10/2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Van ban item 2 -->
+                    <div id="tuyen-sinh" class="py-3 first:pt-0 last:pb-0 hover:bg-gray-50 p-2 rounded transition">
+                        <div class="flex items-start gap-3">
+                            <div class="bg-blue-100 text-brand-blue p-2 rounded-lg shrink-0">
+                                <i class="fas fa-file-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="bg-amber-100 text-amber-800 text-xs px-2 py-0.5 rounded font-medium">Tuyển sinh đầu cấp</span>
+                                <a href="#" class="block font-semibold text-sm text-gray-800 hover:text-brand-blue transition mt-1">
+                                    Kế hoạch & Kế hoạch thời gian tuyển sinh Lớp 1 và Lớp 6 năm học mới
+                                </a>
+                                <span class="text-xs text-gray-400 block mt-1"><i class="far fa-clock"></i> Ngày ban hành: 02/10/2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Van ban item 3 -->
+                    <div class="py-3 first:pt-0 last:pb-0 hover:bg-gray-50 p-2 rounded transition">
+                        <div class="flex items-start gap-3">
+                            <div class="bg-red-100 text-brand-red p-2 rounded-lg shrink-0">
+                                <i class="fas fa-file-pdf text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded font-medium">Văn bản từ sở</span>
+                                <a href="#" class="block font-semibold text-sm text-gray-800 hover:text-brand-blue transition mt-1">
+                                    Thông tư hướng dẫn Đánh giá học sinh Tiểu học & THCS cập nhật
+                                </a>
+                                <span class="text-xs text-gray-400 block mt-1"><i class="far fa-clock"></i> Ngày ban hành: 20/09/2026</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- TỔ CHUYÊN MÔN TABBED SECTION -->
+        <section id="chuyen-mon" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 space-y-6">
+            <div class="text-center max-w-xl mx-auto">
+                <h3 class="text-2xl font-bold text-brand-blue uppercase">Tổ Chuyên Môn Nhà Trường</h3>
+                <p class="text-gray-500 text-sm mt-1">Đội ngũ giáo viên tâm huyết, giàu kinh nghiệm và tận tụy với học sinh</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 border-b border-gray-200 pb-4">
+                <button onclick="switchTab('to-123')" id="btn-to-123" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition bg-brand-blue text-white shadow">Tổ 1-2-3</button>
+                <button onclick="switchTab('to-45')" id="btn-to-45" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold text-gray-600 hover:bg-gray-100 transition">Tổ 4-5</button>
+                <button onclick="switchTab('to-khtn')" id="btn-to-khtn" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold text-gray-600 hover:bg-gray-100 transition">Tổ Khoa học tự nhiên</button>
+                <button onclick="switchTab('to-tnxh')" id="btn-to-tnxh" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold text-gray-600 hover:bg-gray-100 transition">Tổ Tự nhiên xã hội</button>
+            </div>
+
+            <!-- Tab Content Dynamic Container -->
+            <div id="tab-content" class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                <!-- Javascript will populate this based on tab click -->
+            </div>
+        </section>
+
+        <!-- VỀ NHÀ TRƯỜNG SECTION -->
+        <section id="ve-nha-truong" class="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-2xl border border-blue-100 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div class="space-y-4">
+                <span class="bg-brand-blue text-white text-xs font-semibold px-3 py-1 rounded-full uppercase">Giới thiệu</span>
+                <h3 class="text-2xl md:text-3xl font-bold text-brand-blue">Về Trường PTNT TH & THCS PÀ VẦY SỦ</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Trường được thành lập với mục tiêu xây dựng môi trường giáo dục thân thiện, chất lượng cao. Với cơ sở vật chất hiện đại, phòng lab, thư viện thông minh cùng đội ngũ nhà giáo chuẩn mực, chúng tôi cam kết mang lại sự phát triển toàn diện về Tri thức - Thể chất - Tam hồn cho mỗi học sinh.
+                </p>
+                <ul class="space-y-2 text-sm text-gray-700">
+                    <li class="flex items-center gap-2"><i class="fas fa-check-circle text-emerald-600"></i> Chương trình giảng dạy tích hợp chuẩn Bộ GD&ĐT</li>
+                    <li class="flex items-center gap-2"><i class="fas fa-check-circle text-emerald-600"></i> Đẩy mạnh Tiếng Anh & Kỹ năng số hội nhập</li>
+                    <li class="flex items-center gap-2"><i class="fas fa-check-circle text-emerald-600"></i> Các câu lạc bộ ngoại khóa đa dạng nghệ thuật, thể thao</li>
+                </ul>
+            </div>
+            <div class="relative">
+                <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80" alt="Khuôn viên nhà trường" class="rounded-xl shadow-lg w-full object-cover h-64 md:h-80">
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-300 pt-12 pb-6 border-t-4 border-brand-blue">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-gray-800 text-sm">
+            <!-- Col 1: Thông tin trường -->
+            <div class="space-y-3">
+                <h4 class="text-white font-bold text-base uppercase tracking-wider">TRƯỜNG PTNT TH & THCS PÀ VẦY SỦ</h4>
+                <p class="text-xs text-gray-400">Cơ quan chủ quản: Phòng Giáo dục và Đào tạo</p>
+                <p><i class="fas fa-map-marker-alt text-brand-red mr-2"></i> Địa chỉ: xã Pà Vầy Sủ - tỉnh Tuyên Quang</p>
+                <p><i class="fas fa-phone-alt text-brand-gold mr-2"></i> Điện thoại: Hỏi sếp đã </p>
+                <p><i class="fas fa-envelope text-brand-lightBlue mr-2"></i> Email: demo@edu.vn</p>
+            </div>
+
+            <!-- Col 2: Liên kết nhanh -->
+            <div class="space-y-2">
+                <h4 class="text-white font-bold text-base uppercase tracking-wider">Liên kết nhanh</h4>
+                <ul class="space-y-1.5 text-xs">
+                    <li><a href="#trang-chu" class="hover:text-white transition"><i class="fas fa-chevron-right text-[10px] mr-1 text-gray-500"></i> Trang chủ</a></li>
+                    <li><a href="#van-ban-so" class="hover:text-white transition"><i class="fas fa-chevron-right text-[10px] mr-1 text-gray-500"></i> Văn bản từ sở</a></li>
+                    <li><a href="#tuyen-sinh" class="hover:text-white transition"><i class="fas fa-chevron-right text-[10px] mr-1 text-gray-500"></i> Tuyển sinh đầu cấp</a></li>
+                    <li><a href="#chuyen-mon" class="hover:text-white transition"><i class="fas fa-chevron-right text-[10px] mr-1 text-gray-500"></i> Tổ chuyên môn</a></li>
+                    <li><a href="#tin-tuc" class="hover:text-white transition"><i class="fas fa-chevron-right text-[10px] mr-1 text-gray-500"></i> Tin tức – sự kiện</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Bản đồ & Đăng ký -->
+            <div class="space-y-3">
+                <h4 class="text-white font-bold text-base uppercase tracking-wider">Thư bản tin</h4>
+                <p class="text-xs text-gray-400">Nhập email để nhận các thông báo tuyển sinh và văn bản mới nhất từ nhà trường.</p>
+                <form class="flex gap-2" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đăng ký nhận thông tin!');">
+                    <input type="email" placeholder="Email của bạn..." required class="px-3 py-2 bg-gray-800 text-white rounded-lg text-xs w-full focus:outline-none focus:ring-1 focus:ring-brand-blue">
+                    <button type="submit" class="bg-brand-blue hover:bg-brand-lightBlue text-white text-xs px-4 py-2 rounded-lg font-semibold transition">Gửi</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="max-w-7xl mx-auto px-4 pt-6 text-center text-xs text-gray-500">
+            <p>© 2026 Trường PTNT TH & THCS Pà Vầy Sủ. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT -->
+    <script>
+        // Data for specialized teams (Tổ chuyên môn)
+        const teamData = {
+            'to-123': {
+                title: 'Tổ Chuyên Môn Khối 1 - 2 - 3',
+                description: 'Đảm nhận giảng dạy các khối lớp đầu cấp tiểu học, tập trung phát triển kỹ năng đọc, viết, tính toán cơ bản và rèn luyện nếp sống cho học sinh.',
+                leader: 'Cô Đào Thị Yến (Tổ trưởng)',
+                members: '13 Giáo viên',
+                achievements: '100% Đạt Giáo viên giỏi cấp Trường, 3 Giáo viên giỏi cấp Thành phố.'
+            },
+            'to-45': {
+                title: 'Tổ Chuyên Môn Khối 4 - 5',
+                description: 'Chịu trách nhiệm giảng dạy khối 4 và 5, chuẩn bị nền tảng tri thức vững chắc và tâm lý chuyển cấp cho học sinh lên THCS.',
+                leader: 'Cô Triệu Thanh Loan (Tổ trưởng)',
+                members: '12 Giáo viên',
+                achievements: 'Tập thể lao động tiên tiến xuất sắc 3 năm liên tục.'
+            },
+            'to-khtn': {
+                title: 'Tổ Khoa Học Tự Nhiên',
+                description: 'Bao gồm các bộ môn Toán, Vật Lý, Hóa Học, Sinh Học, Tin Học và Công Nghệ khối THCS. Ứng dụng STEM trong giảng dạy.',
+                leader: 'Thầy Nguyễn Văn Tuấn (Tổ trưởng)',
+                members: '17 Giáo viên',
+                achievements: 'Hướng dẫn học sinh đạt 5 giải HSG KHKT cấp Quận/Huyện.'
+            },
+            'to-tnxh': {
+                title: 'Tổ Khoa học Xã Hội',
+                description: 'Bao gồm các bộ môn Ngữ Văn, Lịch Sử, Địa Lý, Giáo Dục Công Dân và Tiếng Anh. Chú trọng giáo dục đạo đức và kỹ năng xã hội.',
+                leader: 'Cô Xèn Thị Hương (Tổ trưởng)',
+                members: '18 Giáo viên',
+                achievements: 'Bồi dưỡng học sinh giỏi môn Ngữ Văn & Tiếng Anh đạt nhiều giải cao.'
+            }
+        };
+
+        // Function to render Tab Content
+        function switchTab(tabKey) {
+            const data = teamData[tabKey];
+            const container = document.getElementById('tab-content');
+            
+            // Highlight active button
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-blue', 'text-white', 'shadow');
+                btn.classList.add('text-gray-600', 'hover:bg-gray-100');
+            });
+
+            const activeBtn = document.getElementById(`btn-${tabKey}`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-brand-blue', 'text-white', 'shadow');
+                activeBtn.classList.remove('text-gray-600', 'hover:bg-gray-100');
+            }
+
+            // Update Content HTML
+            container.innerHTML = `
+                <div class="space-y-3 animate-fadeIn">
+                    <h4 class="text-lg font-bold text-brand-blue">${data.title}</h4>
+                    <p class="text-sm text-gray-600">${data.description}</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 border-t border-gray-200 text-xs sm:text-sm">
+                        <div class="bg-white p-3 rounded-lg border border-gray-200">
+                            <span class="font-semibold text-gray-700 block"><i class="fas fa-user-tie text-brand-blue mr-1"></i> Tổ trưởng:</span>
+                            <span class="text-gray-600">${data.leader}</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-gray-200">
+                            <span class="font-semibold text-gray-700 block"><i class="fas fa-users text-brand-blue mr-1"></i> Nhân sự:</span>
+                            <span class="text-gray-600">${data.members}</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-gray-200">
+                            <span class="font-semibold text-gray-700 block"><i class="fas fa-trophy text-brand-gold mr-1"></i> Thành tích:</span>
+                            <span class="text-gray-600">${data.achievements}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize default tab on load
+        window.onload = function() {
+            switchTab('to-123');
+        };
+
+        // Mobile Menu Drawer Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Mobile Submenu Accordion Toggle
+        document.querySelectorAll('.mobile-dropdown button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const subMenu = btn.nextElementSibling;
+                subMenu.classList.toggle('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

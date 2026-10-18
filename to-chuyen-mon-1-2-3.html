@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tổ Chuyên Môn 1-2-3 | Trường PTNT TH & THCS PÀ VẦY SỦ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1e3a8a',
+                            lightBlue: '#2563eb',
+                            red: '#dc2626',
+                            gold: '#f59e0b',
+                            bgLight: '#f8fafc'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Hover Dropdown Behavior for Desktop */
+        @media (min-width: 1024px) {
+            .group:hover .dropdown-menu {
+                display: block;
+                animation: fadeIn 0.2s ease-in-out;
+            }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card-hover-effect {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800 font-sans flex flex-col min-h-screen">
+
+    <!-- TOP HEADER / CONTACT BAR -->
+    <div class="bg-brand-blue text-white text-xs sm:text-sm py-2 px-4 shadow-inner">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1"><i class="fas fa-phone-alt text-brand-gold"></i> Hotline: Hỏi sếp Huỳnh</span>
+                <span class="hidden md:flex items-center gap-1"><i class="fas fa-envelope text-brand-gold"></i> Email: demo@edu.vn</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="hidden sm:inline"><i class="fas fa-clock text-brand-gold"></i> Giờ làm việc: 7:00 - 17:00 (Thứ 2 - Thứ 6)</span>
+                <div class="flex items-center gap-2">
+                    <a href="#" class="hover:text-brand-gold transition" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-brand-gold transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER & LOGO -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Logo & School Name -->
+            <a href="index.html" class="flex items-center space-x-3 group">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 bg-brand-blue text-white rounded-full flex items-center justify-center font-bold text-xl sm:text-2xl shadow-md border-2 border-brand-gold shrink-0">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-xl font-bold text-brand-blue uppercase leading-tight group-hover:text-brand-lightBlue transition">TRƯỜNG PTNT TH & THCS PÀ VẦY SỦ</h1>
+                    <p class="text-xs text-gray-500 font-medium">Tri thức - Trách nhiệm - Sáng tạo - Phát triển</p>
+                </div>
+            </a>
+
+            <!-- Navigation Quick Action / Search -->
+            <div class="flex items-center gap-3">
+                <a href="trang-chu.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white transition">
+                    <i class="fas fa-arrow-left"></i> Quay lại trang chủ
+                </a>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-gray-600 hover:text-brand-blue hover:bg-gray-100 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- MAIN NAVIGATION BAR -->
+        <nav class="bg-brand-blue text-white border-t border-blue-900 hidden lg:block">
+            <div class="max-w-7xl mx-auto px-4">
+                <ul class="flex items-center font-medium text-sm">
+                    <!-- 1. Trang chủ -->
+                    <li>
+                        <a href="index.html" class="inline-block py-3.5 px-5 hover:bg-blue-800 transition">
+                            <i class="fas fa-home mr-1"></i> Trang chủ
+                        </a>
+                    </li>
+
+                    <!-- 2. Văn bản (Dropdown) -->
+                    <li class="relative group">
+                        <a href="index.html#van-ban" class="inline-flex items-center py-3.5 px-5 hover:bg-blue-800 transition">
+                            Văn bản <i class="fas fa-chevron-down text-xs ml-1.5 opacity-80"></i>
+                        </a>
+                        <div class="dropdown-menu hidden absolute left-0 w-56 bg-white text-gray-800 shadow-xl rounded-b-lg border-t-2 border-brand-red py-2 z-50">
+                            <a href="index.html#van-ban-so" class="block px-4 py-2.5 hover:bg-blue-50 hover:text-brand-blue text-sm border-b border-gray-100 transition"><i class="fas fa-file-alt text-brand-blue mr-2"></i> Văn bản từ sở</a>
+                            <a href="index.html#tuyen-sinh" class="block px-4 py-2.5 hover:bg-blue-50 hover:text-brand-blue text-sm transition"><i class="fas fa-user-plus text-brand-blue mr-2"></i> Tuyển sinh đầu cấp</a>
+                        </div>
+                    </li>
+
+                    <!-- 3. Chuyên môn (Dropdown) - Active State -->
+                    <li class="relative group">
+                        <a href="#to-123" class="inline-flex items-center py-3.5 px-5 bg-blue-800 font-semibold text-brand-gold transition border-b-2 border-brand-gold">
+                            Chuyên môn <i class="fas fa-chevron-down text-xs ml-1.5 opacity-80"></i>
+                        </a>
+                        <div class="dropdown-menu hidden absolute left-0 w-64 bg-white text-gray-800 shadow-xl rounded-b-lg border-t-2 border-brand-red py-2 z-50">
+                            <a href="to-123.html" class="block px-4 py-2.5 bg-blue-50 text-brand-blue font-bold text-sm border-b border-gray-100 transition"><i class="fas fa-users text-brand-blue mr-2"></i> Tổ 1-2-3 (Đang xem)</a>
+                            <a href="#" onclick="switchDept('to-45')" class="block px-4 py-2.5 hover:bg-blue-50 hover:text-brand-blue text-sm border-b border-gray-100 transition"><i class="fas fa-users text-brand-blue mr-2"></i> Tổ 4-5</a>
+                            <a href="#" onclick="switchDept('to-khtn')" class="block px-4 py-2.5 hover:bg-blue-50 hover:text-brand-blue text-sm border-b border-gray-100 transition"><i class="fas fa-atom text-brand-blue mr-2"></i> Tổ Khoa học tự nhiên</a>
+                            <a href="#" onclick="switchDept('to-tnxh')" class="block px-4 py-2.5 hover:bg-blue-50 hover:text-brand-blue text-sm transition"><i class="fas fa-globe-asia text-brand-blue mr-2"></i> Tổ Tự nhiên xã hội</a>
+                        </div>
+                    </li>
+
+                    <!-- 4. Tin tức – sự kiện -->
+                    <li>
+                        <a href="index.html#tin-tuc" class="inline-block py-3.5 px-5 hover:bg-blue-800 transition">
+                            Tin tức – sự kiện
+                        </a>
+                    </li>
+
+                    <!-- 5. Về nhà trường -->
+                    <li>
+                        <a href="index.html#ve-nha-truong" class="inline-block py-3.5 px-5 hover:bg-blue-800 transition">
+                            Về nhà trường
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- MOBILE NAVIGATION DRAWER -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-blue-900 text-white border-t border-blue-800">
+            <ul class="divide-y divide-blue-800/50 text-sm">
+                <li><a href="index.html" class="block px-4 py-3 hover:bg-blue-800"><i class="fas fa-home mr-2"></i> Trang chủ</a></li>
+                <li class="mobile-dropdown">
+                    <button class="w-full text-left px-4 py-3 flex justify-between items-center bg-blue-800 text-brand-gold font-bold focus:outline-none">
+                        <span><i class="fas fa-book-reader mr-2"></i> Chuyên môn</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="mobile-sub-menu bg-blue-950 px-6 py-2 space-y-2">
+                        <a href="to-123.html" class="block py-1.5 text-brand-gold font-bold">• Tổ 1-2-3 (Đang xem)</a>
+                        <a href="#" onclick="switchDept('to-45')" class="block py-1.5 text-blue-200 hover:text-white">• Tổ 4-5</a>
+                        <a href="#" onclick="switchDept('to-khtn')" class="block py-1.5 text-blue-200 hover:text-white">• Tổ Khoa học tự nhiên</a>
+                        <a href="#" onclick="switchDept('to-tnxh')" class="block py-1.5 text-blue-200 hover:text-white">• Tổ Tự nhiên xã hội</a>
+                    </div>
+                </li>
+                <li><a href="index.html#tin-tuc" class="block px-4 py-3 hover:bg-blue-800"><i class="fas fa-newspaper mr-2"></i> Tin tức – sự kiện</a></li>
+                <li><a href="index.html#ve-nha-truong" class="block px-4 py-3 hover:bg-blue-800"><i class="fas fa-school mr-2"></i> Về nhà trường</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- BREADCRUMB NAVIGATION -->
+    <div class="bg-white border-b border-gray-200 py-3 px-4">
+        <div class="max-w-7xl mx-auto text-xs sm:text-sm text-gray-500 flex items-center gap-2 flex-wrap">
+            <a href="index.html" class="hover:text-brand-blue transition"><i class="fas fa-home"></i> Trang chủ</a>
+            <span><i class="fas fa-chevron-right text-[10px] text-gray-400"></i></span>
+            <span class="text-gray-700">Tổ Chuyên Môn</span>
+            <span><i class="fas fa-chevron-right text-[10px] text-gray-400"></i></span>
+            <span class="font-bold text-brand-blue" id="breadcrumb-title">Tổ 1-2-3</span>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-6xl mx-auto px-4 py-10 flex-grow w-full space-y-10">
+
+        <!-- DEPT SWITCHER BAR (QUICK NAV) -->
+        <div class="flex flex-wrap justify-center gap-2 bg-white p-2.5 rounded-xl shadow-sm border border-gray-200">
+            <button onclick="switchDept('to-123')" id="nav-to-123" class="dept-nav-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-bold bg-brand-blue text-white shadow-sm transition">
+                Tổ 1-2-3
+            </button>
+           <!--  <button onclick="switchDept('to-45')" id="nav-to-45" class="dept-nav-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-gray-600 hover:bg-gray-100 transition">
+                Tổ 4-5
+            </button>
+            <button onclick="switchDept('to-khtn')" id="nav-to-khtn" class="dept-nav-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-gray-600 hover:bg-gray-100 transition">
+                Tổ Khoa Học Tự Nhiên
+            </button>
+            <button onclick="switchDept('to-tnxh')" id="nav-to-tnxh" class="dept-nav-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-gray-600 hover:bg-gray-100 transition">
+                Tổ Tự Nhiên Xã Hội
+            </button> -->
+        </div>
+
+        <!-- DYNAMIC DEPARTMENT VIEW AREA -->
+        <div id="department-view" class="space-y-10">
+            <!-- Content render dynamically via JavaScript -->
+        </div>
+
+        <!-- STATS & SUMMARY DASHBOARD FOR DEPT -->
+        <section class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 shadow-sm">
+            <h3 class="text-lg font-bold text-brand-blue uppercase mb-6 flex items-center gap-2 border-b pb-3">
+                <i class="fas fa-chart-line text-brand-gold"></i> Tổng Quan Nhiệm Vụ & Hoạt Động Chuyên Môn
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-blue-50/60 p-5 rounded-xl border border-blue-100 space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-brand-blue text-white flex items-center justify-center font-bold">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 text-sm">Nhiệm Vụ Trọng Tâm</h4>
+                    </div>
+                    <p class="text-xs text-gray-600 leading-relaxed pt-1">
+                        Xây dựng nền tảng tri thức ban đầu, rèn nếp sống tự lập, kỹ năng đọc - viết - tính toán thành thạo cho học sinh khối 1, 2 và 3 theo chương trình GDPT 2018.
+                    </p>
+                </div>
+
+                <div class="bg-amber-50/60 p-5 rounded-xl border border-amber-100 space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-brand-gold text-white flex items-center justify-center font-bold">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 text-sm">Lịch Sinh Hoạt Chuyên Môn</h4>
+                    </div>
+                    <p class="text-xs text-gray-600 leading-relaxed pt-1">
+                        Định kỳ chiều Thứ 4 (tuần thứ 2 và tuần thứ 4 hàng tháng). Tập trung đổi mới phương pháp giảng dạy, dự giờ và ứng dụng công nghệ thông tin.
+                    </p>
+                </div>
+
+                <div class="bg-emerald-50/60 p-5 rounded-xl border border-emerald-100 space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 text-sm">Thành Tích Thi Đua</h4>
+                    </div>
+                    <p class="text-xs text-gray-600 leading-relaxed pt-1">
+                        100% giáo viên đạt danh hiệu Giáo viên dạy giỏi cấp Trường. Đạt Tập thể Lao động Tiên tiến xuất sắc năm học 2025 - 2026.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-300 pt-10 pb-6 border-t-4 border-brand-blue">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-gray-800 text-sm">
+            <div class="space-y-3">
+                <h4 class="text-white font-bold text-base uppercase tracking-wider">TRƯỜNG PTNT TH & THCS PÀ VẦY SỦ</h4>
+                <p class="text-xs text-gray-400">Cơ quan chủ quản: Phòng Giáo dục và Đào tạo</p>
+                <p><i class="fas fa-map-marker-alt text-brand-red mr-2"></i> Địa chỉ: xã Pà Vầy Sủ</p>
+                <p><i class="fas fa-phone-alt text-brand-gold mr-2"></i> Điện thoại: Hỏi sếp Huỳnh</p>
+                <p><i class="fas fa-envelope text-brand-lightBlue mr-2"></i> Email: demo@edu.vn</p>
+            </div>
+
+            <div class="space-y-2">
+                <h4 class="text-white font-bold text-base uppercase tracking-wider">Liên kết nhanh</h4>
+                <ul class="space-y-1.5 text-xs">
+                    <li><a href="index.html" class="hover:text-white transition"><i class="fas fa-chevron-right text-[10px] mr-1 text-gray-500"></i> Trang chủ</a></li>
+                    <li><a href="to-123.html" class="hover:text-white transition"><i class="fas fa-chevron-right text-[10px] mr-1 text-gray-500"></i> Tổ chuyên môn 1-2-3</a></li>
+                    <li><a href="index.html#van-ban" class="hover:text-white transition"><i class="fas fa-chevron-right text-[10px] mr-1 text-gray-500"></i> Văn bản chỉ đạo</a></li>
+                    <li><a href="index.html#tin-tuc" class="hover:text-white transition"><i class="fas fa-chevron-right text-[10px] mr-1 text-gray-500"></i> Tin tức – sự kiện</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-3">
+                <h4 class="text-white font-bold text-base uppercase tracking-wider">Thư bản tin</h4>
+                <p class="text-xs text-gray-400">Nhập email để nhận thông tin cập nhật liên quan đến lịch hoạt động chuyên môn.</p>
+                <form class="flex gap-2" onsubmit="event.preventDefault(); alert('Đã đăng ký nhận bản tin thành công!');">
+                    <input type="email" placeholder="Email của bạn..." required class="px-3 py-2 bg-gray-800 text-white rounded-lg text-xs w-full focus:outline-none focus:ring-1 focus:ring-brand-blue">
+                    <button type="submit" class="bg-brand-blue hover:bg-brand-lightBlue text-white text-xs px-4 py-2 rounded-lg font-semibold transition">Gửi</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 pt-6 text-center text-xs text-gray-500">
+            <p>© 2026 Trường TH & THCS Giáo Dục Việt Nam. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPT TO SWITCH & RENDER ORGANIZATIONAL MAP -->
+    <script>
+        // Department Staff Data directly matched with requirement
+        const departmentData = {
+            'to-123': {
+                title: 'Tổ 1-2-3',
+                subtitle: 'Tổ Chuyên Môn Khối Lớp 1, 2 và 3',
+                leaderLeft: { role: 'Tổ trưởng', name: 'Đào Thị Yến' },
+                leaderRight: { role: 'Tổ phó', name: 'Trần Văn Hoàn' },
+                members: [
+                    { left: 'Giàng Thị Hoài Thu', right: 'Nguyễn Lệ Hằng' },
+                    { left: '....', right: '....' },
+                    { left: '....', right: '....' },
+                    { left: '....', right: '....' }
+                ]
+            },
+            
+        };
+
+        function switchDept(deptKey) {
+            const data = departmentData[deptKey];
+            if (!data) return;
+
+            // Update Breadcrumb & Nav buttons active state
+            document.getElementById('breadcrumb-title').innerText = data.title;
+            
+            document.querySelectorAll('.dept-nav-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-blue', 'text-white', 'shadow-sm');
+                btn.classList.add('text-gray-600', 'hover:bg-gray-100');
+            });
+
+            const currentNavBtn = document.getElementById(`nav-${deptKey}`);
+            if (currentNavBtn) {
+                currentNavBtn.classList.add('bg-brand-blue', 'text-white', 'shadow-sm');
+                currentNavBtn.classList.remove('text-gray-600', 'hover:bg-gray-100');
+            }
+
+            // Build Members Rows HTML dynamically
+            let membersHTML = '';
+            data.members.forEach((pair, index) => {
+                membersHTML += `
+                    <!-- Pair Row ${index + 1} -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                        <!-- Left Member -->
+                        <div class="card-hover-effect bg-white border-2 border-gray-300 rounded-xl p-4 sm:p-5 flex items-center justify-between shadow-xs">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-sm">
+                                    <i class="fas fa-user-graduate"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-gray-500 font-semibold block uppercase tracking-wider">Thành viên:</span>
+                                    <span class="text-base sm:text-lg font-bold text-gray-800">${pair.left}</span>
+                                </div>
+                            </div>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-md font-medium hidden sm:inline-block">Giáo viên</span>
+                        </div>
+
+                        <!-- Right Member -->
+                        <div class="card-hover-effect bg-white border-2 border-gray-300 rounded-xl p-4 sm:p-5 flex items-center justify-between shadow-xs">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-sm">
+                                    <i class="fas fa-user-graduate"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-gray-500 font-semibold block uppercase tracking-wider">Thành viên:</span>
+                                    <span class="text-base sm:text-lg font-bold text-gray-800">${pair.right}</span>
+                                </div>
+                            </div>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-md font-medium hidden sm:inline-block">Giáo viên</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Populate Main View
+            const container = document.getElementById('department-view');
+            container.innerHTML = `
+                <div class="space-y-8 animate-fadeIn">
+                    <!-- MAIN DEPT HEADER CARD -->
+                    <div class="flex justify-center">
+                        <div class="bg-white border-2 border-brand-blue rounded-2xl px-8 py-5 text-center shadow-md max-w-xl w-full">
+                            <span class="text-xs uppercase font-extrabold tracking-widest text-brand-gold bg-blue-50 px-3 py-1 rounded-full inline-block mb-1">Sơ đồ tổ chức</span>
+                            <h2 class="text-2xl sm:text-4xl font-black text-brand-blue tracking-tight uppercase">${data.title}</h2>
+                            <p class="text-xs sm:text-sm text-gray-500 font-medium mt-1">${data.subtitle}</p>
+                        </div>
+                    </div>
+
+                    <!-- ORGANIZATIONAL GRID -->
+                    <div class="space-y-4 max-w-5xl mx-auto">
+                        
+                        <!-- LEADERSHIP ROW (2 COLS) -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                            
+                            <!-- Left: Leader / Tổ trưởng -->
+                            <div class="card-hover-effect bg-white border-2 border-brand-blue rounded-xl p-4 sm:p-5 flex items-center justify-between shadow-sm relative overflow-hidden">
+                                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-brand-blue"></div>
+                                <div class="flex items-center space-x-3 pl-2">
+                                    <div class="w-11 h-11 rounded-full bg-blue-100 text-brand-blue flex items-center justify-center font-bold text-lg">
+                                        <i class="fas fa-user-tie"></i>
+                                    </div>
+                                    <div>
+                                        <span class="text-xs text-brand-blue font-bold block uppercase tracking-wider">Tổ trưởng:</span>
+                                        <span class="text-base sm:text-xl font-black text-gray-900">${data.leaderLeft.name}</span>
+                                    </div>
+                                </div>
+                                <span class="text-xs bg-blue-100 text-brand-blue px-3 py-1 rounded-full font-bold">Lãnh đạo tổ</span>
+                            </div>
+
+                            <!-- Right: Vice Leader / Tổ phó -->
+                            <div class="card-hover-effect bg-white border-2 border-brand-lightBlue rounded-xl p-4 sm:p-5 flex items-center justify-between shadow-sm relative overflow-hidden">
+                                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-brand-lightBlue"></div>
+                                <div class="flex items-center space-x-3 pl-2">
+                                    <div class="w-11 h-11 rounded-full bg-blue-50 text-brand-lightBlue flex items-center justify-center font-bold text-lg">
+                                        <i class="fas fa-user-shield"></i>
+                                    </div>
+                                    <div>
+                                        <span class="text-xs text-brand-lightBlue font-bold block uppercase tracking-wider">Tổ phó:</span>
+                                        <span class="text-base sm:text-xl font-black text-gray-900">${data.leaderRight.name}</span>
+                                    </div>
+                                </div>
+                                <span class="text-xs bg-blue-50 text-brand-lightBlue px-3 py-1 rounded-full font-bold">Lãnh đạo tổ</span>
+                            </div>
+
+                        </div>
+
+                        <!-- MEMBERS ROWS -->
+                        ${membersHTML}
+
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize default view for 'to-123'
+        window.onload = function() {
+            switchDept('to-123');
+        };
+
+        // Mobile Menu Drawer Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
