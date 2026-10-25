@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tổ Chuyên Môn 4-5 | Trường PTNT TH & THCS PÀ VẦY SỦ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1e3a8a',
+                            lightBlue: '#2563eb',
+                            red: '#dc2626',
+                            gold: '#f59e0b',
+                            bgLight: '#f8fafc'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @media (min-width: 1024px) {
+            .group:hover .dropdown-menu {
+                display: block;
+                animation: fadeIn 0.2s ease-in-out;
+            }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card-hover-effect {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -6px rgba(30, 58, 138, 0.15);
+        }
+        .card-hover-effect {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -6px rgba(30, 58, 138, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800 font-sans flex flex-col min-h-screen">
+
+    <!-- HEADER PLACEHOLDER -->
+    <div id="header-placeholder"></div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-6xl mx-auto px-4 py-10 flex-grow w-full space-y-10">
+
+        <!-- DEPT SWITCHER BAR (QUICK NAV) -->
+        <div class="flex flex-wrap justify-center gap-2 bg-white p-2.5 rounded-xl shadow-sm border border-gray-200">
+            <button onclick="switchDept('to-123')" id="nav-to-123" class="dept-nav-btn px-5 py-2.5 rounded-lg text-sm font-bold bg-brand-blue text-white shadow-sm transition flex items-center gap-2">
+                <i class="fas fa-users"></i> Tổ 4-5
+            </button>
+        </div>
+
+        <!-- DYNAMIC DEPARTMENT VIEW AREA -->
+        <div id="department-view" class="space-y-10">
+            <!-- Content rendered dynamically via JavaScript -->
+        </div>
+
+        <!-- STATS & SUMMARY DASHBOARD FOR DEPT -->
+        <section class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 shadow-sm">
+            <h3 class="text-lg font-bold text-brand-blue uppercase mb-6 flex items-center gap-2 border-b pb-3">
+                <i class="fas fa-chart-line text-brand-gold"></i> Tổng Quan Nhiệm Vụ & Hoạt Động Chuyên Môn
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-blue-50/60 p-5 rounded-xl border border-blue-100 space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-brand-blue text-white flex items-center justify-center font-bold">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 text-sm">Nhiệm Vụ Trọng Tâm</h4>
+                    </div>
+                    <p class="text-xs text-gray-600 leading-relaxed pt-1">
+                        Xây dựng nền tảng tri thức ban đầu, rèn nếp sống tự lập, kỹ năng đọc - viết - tính toán thành thạo cho học sinh khối 4, 5 theo chương trình GDPT 2018.
+                    </p>
+                </div>
+
+                <div class="bg-amber-50/60 p-5 rounded-xl border border-amber-100 space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-brand-gold text-white flex items-center justify-center font-bold">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 text-sm">Lịch Sinh Hoạt Chuyên Môn</h4>
+                    </div>
+                    <p class="text-xs text-gray-600 leading-relaxed pt-1">
+                        Định kỳ chiều Thứ 6 (tuần thứ 2 và tuần thứ 4 hàng tháng). Tập trung đổi mới phương pháp giảng dạy, dự giờ và ứng dụng công nghệ thông tin.
+                    </p>
+                </div>
+
+                <div class="bg-emerald-50/60 p-5 rounded-xl border border-emerald-100 space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 text-sm">Thành Tích Thi Đua</h4>
+                    </div>
+                    <p class="text-xs text-gray-600 leading-relaxed pt-1">
+                        100% giáo viên đạt danh hiệu Giáo viên dạy giỏi cấp Trường. Đạt Tập thể Lao động Tiên tiến xuất sắc năm học 2025 - 2026.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER PLACEHOLDER -->
+    <div id="footer-placeholder"></div>
+
+    <!-- INTERACTIVE SCRIPT TO SWITCH & RENDER ORGANIZATIONAL MAP -->
+    <script>
+        const departmentData = {
+            'to-123': {
+                title: 'Tổ Chuyên Môn 4-5',
+                subtitle: 'Khối Lớp 4, Lớp 5',
+                leaderLeft: { role: 'Tổ trưởng', name: 'Triệu Thanh Loan' },
+                leaderRight: { role: 'Tổ phó', name: 'Đỗ Thị Kim' },
+                members: [
+                    { name: 'Chúng Thị Hương', subject: 'Giáo viên Chủ nhiệm' },
+                    { name: 'Nguyễn Văn Hưng', subject: 'Giáo viên Chủ nhiệm' },
+                    { name: 'Nguyễn Kim Trường', subject: 'Giáo viên Chủ nhiệm' },
+                    { name: 'Lù Văn Thịnh', subject: 'Giáo viên Chủ nhiệm' },
+                    { name: 'Nguyễn Thị Thu Huyền', subject: 'Giáo viên Chủ nhiệm' },
+                    { name: 'Mỵ Thị Nga', subject: 'Giáo viên Chủ nhiệm' },
+                    { name: 'Lý Hữu Chiến', subject: 'Giáo viên Bộ môn' },
+                    { name: 'Nguyễn Thị Thanh Huyên', subject: 'Giáo viên Bộ môn' },
+                    { name: 'Sin Trung Hiếu', subject: 'Giáo viên Bộ môn' },
+                ]
+            }
+        };
+
+        function switchDept(deptKey) {
+            const data = departmentData[deptKey];
+            if (!data) return;
+
+            // Render Members Cards
+            let membersHTML = '';
+            data.members.forEach((member) => {
+                membersHTML += `
+                    <div class="card-hover-effect bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-between shadow-sm">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-50 text-brand-blue flex items-center justify-center font-bold text-sm border border-blue-100">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-gray-400 font-medium block uppercase tracking-wider">${member.subject}</span>
+                                <span class="text-base font-bold text-gray-800">${member.name}</span>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-medium hidden sm:inline-block">Thành viên</span>
+                    </div>
+                `;
+            });
+
+            // Populate Main View
+            const container = document.getElementById('department-view');
+            if (!container) return;
+
+            container.innerHTML = `
+                <div class="space-y-8 animate-fadeIn">
+                    <!-- MAIN DEPT HEADER CARD -->
+                    <div class="flex justify-center">
+                        <div class="bg-white border-2 border-brand-blue rounded-2xl px-8 py-6 text-center shadow-md max-w-xl w-full relative overflow-hidden">
+                            <div class="absolute -top-6 -right-6 w-20 h-20 bg-blue-50 rounded-full z-0"></div>
+                            <span class="relative z-10 text-xs uppercase font-extrabold tracking-widest text-brand-gold bg-blue-50 px-3 py-1 rounded-full inline-block mb-2 border border-blue-100">
+                                <i class="fas fa-sitemap mr-1"></i> Sơ đồ tổ chức
+                            </span>
+                            <h2 class="relative z-10 text-2xl sm:text-3xl font-black text-brand-blue tracking-tight uppercase">${data.title}</h2>
+                            <p class="relative z-10 text-xs sm:text-sm text-gray-500 font-medium mt-1">${data.subtitle}</p>
+                        </div>
+                    </div>
+
+                    <!-- ORGANIZATIONAL GRID -->
+                    <div class="space-y-6 max-w-5xl mx-auto">
+                        
+                        <!-- LEADERSHIP ROW (2 COLS) -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                            
+                            <!-- Left: Leader / Tổ trưởng -->
+                            <div class="card-hover-effect bg-white border-2 border-brand-blue rounded-2xl p-5 flex items-center justify-between shadow-sm relative overflow-hidden">
+                                <div class="absolute left-0 top-0 bottom-0 w-2 bg-brand-blue"></div>
+                                <div class="flex items-center space-x-4 pl-2">
+                                    <img src="image/chi-loan.jpg" alt="Tổ trưởng" class="w-28 h-28 rounded-full object-cover border-2 border-brand-blue shadow-inner">
+                                    <div>
+                                        <span class="text-xs text-brand-blue font-extrabold block uppercase tracking-wider">Tổ trưởng</span>
+                                        <span class="text-lg sm:text-xl font-black text-gray-900">${data.leaderLeft.name}</span>
+                                    </div>
+                                </div>
+                                <span class="text-xs bg-blue-100 text-brand-blue px-3 py-1 rounded-full font-bold shadow-xs">Lãnh đạo tổ</span>
+                            </div>
+
+                            <!-- Right: Vice Leader / Tổ phó -->
+                            <div class="card-hover-effect bg-white border-2 border-brand-lightBlue rounded-2xl p-5 flex items-center justify-between shadow-sm relative overflow-hidden">
+                                <div class="absolute left-0 top-0 bottom-0 w-2 bg-brand-lightBlue"></div>
+                                <div class="flex items-center space-x-4 pl-2">
+                                   <img src="image/chi-kim.jpg" alt="Tổ phó" class="w-28 h-28 rounded-full object-cover border-2 border-brand-blue shadow-inner">
+                                    <div>
+                                        <span class="text-xs text-brand-lightBlue font-extrabold block uppercase tracking-wider">Tổ phó</span>
+                                        <span class="text-lg sm:text-xl font-black text-gray-900">${data.leaderRight.name}</span>
+                                    </div>
+                                </div>
+                                <span class="text-xs bg-blue-50 text-brand-lightBlue px-3 py-1 rounded-full font-bold shadow-xs">Lãnh đạo tổ</span>
+                            </div>
+
+                        </div>
+
+                        <!-- MEMBER GRID SECTION TITLE -->
+                        <div class="pt-4 border-t border-gray-200">
+                            <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                                <i class="fas fa-user-friends"></i> Danh sách thành viên tổ
+                            </h4>
+                            <!-- MEMBERS GRID -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                ${membersHTML}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            `;
+        }
+
+        // Run when DOM is fully loaded
+        document.addEventListener("DOMContentLoaded", function () {
+            switchDept('to-123');
+        });
+    </script>
+
+    <!-- COMPONENT SCRIPTS -->
+    <script src="components/header.js"></script>
+    <script src="components/footer.js"></script>
+</body>
+</html>

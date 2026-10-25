@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin tức – Sự kiện | Trường PTNT TH & THCS Pà Vầy Sủ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1e3a8a',
+                            lightBlue: '#2563eb',
+                            red: '#dc2626',
+                            gold: '#f59e0b',
+                            bgLight: '#f8fafc'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Hover Dropdown Behavior for Desktop */
+        @media (min-width: 1024px) {
+            .group:hover .dropdown-menu {
+                display: block;
+                animation: fadeIn 0.2s ease-in-out;
+            }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Custom Scrollbar for Modal */
+        .modal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-body::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans flex flex-col min-h-screen">
+
+    <!-- HEADER -->
+    <div id="header-placeholder"></div>
+
+    <!-- BREADCRUMB & HERO HEADER -->
+    <section class="bg-gradient-to-r from-blue-950 via-brand-blue to-indigo-900 text-white py-10 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80');"></div>
+        <div class="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">TIN TỨC & SỰ KIỆN NỔI BẬT</h2>
+                <p class="text-blue-100 text-xs sm:text-sm mt-1">Cập nhật nhanh nhất các hoạt động, phong trào và thông báo chính thức của nhà trường</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/20 text-xs text-blue-100 flex items-center gap-3">
+                <i class="fas fa-bullhorn text-brand-gold text-2xl animate-bounce"></i>
+                <div>
+                    <span class="font-bold text-white block">Nhịp sống Pà Vầy Sủ</span>
+                    <span>Cùng nâng bước học sinh vùng cao tới trường</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full space-y-8">
+
+        <!-- SEARCH & CATEGORY FILTER BAR -->
+        <section class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-gray-200 space-y-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <!-- Live Search Box -->
+                <div class="relative flex-grow max-w-md">
+                    <input type="text" id="filter-search-input" placeholder="Nhập từ khóa tìm bài viết..." class="w-full text-sm pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:bg-white focus:border-brand-lightBlue focus:ring-2 focus:ring-blue-100 transition">
+                    <i class="fas fa-search absolute left-3.5 top-3.5 text-gray-400 text-sm"></i>
+                </div>
+
+                <!-- Active Filter Counter -->
+                <div class="text-xs text-gray-500 font-medium flex items-center gap-1">
+                    Hiển thị <span id="news-count" class="font-bold text-brand-blue">0</span> bài viết
+                </div>
+            </div>
+
+            <!-- Category Filter Buttons -->
+            <div class="flex flex-wrap gap-2 pt-2 border-t border-gray-100" id="category-buttons">
+                <button onclick="filterCategory('all')" data-cat="all" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition bg-brand-blue text-white shadow-sm">
+                    Tất cả tin tức
+                </button>
+                <button onclick="filterCategory('su-kien')" data-cat="su-kien" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition text-gray-600 bg-gray-100 hover:bg-gray-200">
+                    <i class="fas fa-star text-brand-gold mr-1"></i> Sự kiện nổi bật
+                </button>
+                <button onclick="filterCategory('chuyen-mon')" data-cat="chuyen-mon" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition text-gray-600 bg-gray-100 hover:bg-gray-200">
+                    <i class="fas fa-chalkboard-teacher text-brand-blue mr-1"></i> Hoạt động chuyên môn
+                </button>
+                <button onclick="filterCategory('doan-doi')" data-cat="doan-doi" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition text-gray-600 bg-gray-100 hover:bg-gray-200">
+                    <i class="fas fa-flag text-brand-red mr-1"></i> Phong trào - Đoàn đội
+                </button>
+                <button onclick="filterCategory('thong-bao')" data-cat="thong-bao" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition text-gray-600 bg-gray-100 hover:bg-gray-200">
+                    <i class="fas fa-bell text-emerald-600 mr-1"></i> Thông báo học đường
+                </button>
+            </div>
+        </section>
+
+        <!-- SPOTLIGHT FEATURED NEWS (SHOWS MAIN HIGHLIGHTED ARTICLE) -->
+        <section id="spotlight-section" class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200 transition hover:shadow-lg">
+            <!-- Dynamic Content populated by JS -->
+        </section>
+
+        <!-- TWO COLUMN LAYOUT: MAIN NEWS LIST & SIDEBAR -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- LEFT COLUMN: NEWS CARDS GRID (2 Cols) -->
+            <div class="lg:col-span-2 space-y-6">
+                <div class="flex items-center justify-between border-b-2 border-brand-blue pb-2">
+                    <h3 class="text-lg font-bold text-brand-blue uppercase flex items-center gap-2">
+                        <i class="fas fa-newspaper text-brand-red"></i> Danh sách bài viết
+                    </h3>
+                    <span class="text-xs text-gray-400">Trang <span id="current-page-num">1</span></span>
+                </div>
+
+                <!-- Cards Container Grid -->
+                <div id="news-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <!-- Populated via Javascript -->
+                </div>
+
+                <!-- Empty State Message -->
+                <div id="no-results" class="hidden text-center py-12 bg-white rounded-2xl border border-gray-200">
+                    <i class="fas fa-search-minus text-4xl text-gray-300 mb-3"></i>
+                    <p class="text-gray-600 font-medium">Không tìm thấy bài viết phù hợp với yêu cầu.</p>
+                    <button onclick="resetFilters()" class="mt-3 text-xs bg-brand-blue text-white px-4 py-2 rounded-lg font-semibold hover:bg-brand-lightBlue transition">Xem tất cả bài viết</button>
+                </div>
+
+                <!-- PAGINATION BAR -->
+                <div id="pagination-container" class="flex justify-center items-center gap-2 pt-4">
+                    <!-- Dynamic Pagination Buttons generated by JS -->
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: SIDEBAR (1 Col) -->
+            <aside class="space-y-6">
+
+                <!-- WIDGET 1: TRENDING NEWS (XEM NHIỀU NHẤT) -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-200">
+                    <h4 class="font-bold text-base text-gray-900 border-b-2 border-brand-gold pb-2 mb-4 flex items-center gap-2 uppercase">
+                        <i class="fas fa-fire text-brand-gold"></i> Xem nhiều nhất
+                    </h4>
+                    <div id="trending-list" class="space-y-4 divide-y divide-gray-100">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- WIDGET 2: UPCOMING EVENTS (LỊCH SỰ KIỆN SẮP DIỄN RA) -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-200">
+                    <h4 class="font-bold text-base text-gray-900 border-b-2 border-brand-red pb-2 mb-4 flex items-center gap-2 uppercase">
+                        <i class="far fa-calendar-alt text-brand-red"></i> Sự kiện sắp diễn ra
+                    </h4>
+                    <div class="space-y-3">
+                        <!-- Event item 1 -->
+                        <div class="flex items-center gap-3 p-2.5 rounded-xl bg-blue-50/60 border border-blue-100 hover:bg-blue-50 transition">
+                            <div class="bg-brand-blue text-white rounded-lg w-12 h-12 shrink-0 flex flex-col items-center justify-center font-bold">
+                                <span class="text-xs uppercase font-normal">Tháng 11</span>
+                                <span class="text-base leading-none">20</span>
+                            </div>
+                            <div>
+                                <h5 class="text-xs font-bold text-gray-800 line-clamp-1">Lễ Kỷ niệm Ngày Nhà giáo Việt Nam 20/11</h5>
+                                <p class="text-[11px] text-gray-500 mt-0.5"><i class="fas fa-map-marker-alt text-brand-red mr-1"></i> Sân trường chính</p>
+                            </div>
+                        </div>
+
+                        <!-- Event item 2 -->
+                        <div class="flex items-center gap-3 p-2.5 rounded-xl bg-amber-50/60 border border-amber-100 hover:bg-amber-50 transition">
+                            <div class="bg-brand-gold text-white rounded-lg w-12 h-12 shrink-0 flex flex-col items-center justify-center font-bold">
+                                <span class="text-xs uppercase font-normal">Tháng 12</span>
+                                <span class="text-base leading-none">05</span>
+                            </div>
+                            <div>
+                                <h5 class="text-xs font-bold text-gray-800 line-clamp-1">Chương trình "Mùa đông ấm áp Pà Vầy Sủ"</h5>
+                                <p class="text-[11px] text-gray-500 mt-0.5"><i class="fas fa-map-marker-alt text-brand-red mr-1"></i> Hội trường nhà trường</p>
+                            </div>
+                        </div>
+
+                        <!-- Event item 3 -->
+                        <div class="flex items-center gap-3 p-2.5 rounded-xl bg-emerald-50/60 border border-emerald-100 hover:bg-emerald-50 transition">
+                            <div class="bg-emerald-600 text-white rounded-lg w-12 h-12 shrink-0 flex flex-col items-center justify-center font-bold">
+                                <span class="text-xs uppercase font-normal">Tháng 12</span>
+                                <span class="text-base leading-none">22</span>
+                            </div>
+                            <div>
+                                <h5 class="text-xs font-bold text-gray-800 line-clamp-1">Hội khỏe Phù Đổng cấp Trường năm 2026</h5>
+                                <p class="text-[11px] text-gray-500 mt-0.5"><i class="fas fa-map-marker-alt text-brand-red mr-1"></i> Khu thể thao đa năng</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+        </div>
+    </main>
+
+    <!-- QUICK VIEW ARTICLE MODAL -->
+    <div id="article-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300" id="modal-card">
+            <!-- Modal Header -->
+            <div class="p-4 sm:p-5 border-b border-gray-200 flex justify-between items-center bg-gray-50 shrink-0">
+                <span id="modal-category" class="bg-brand-blue text-white text-xs px-2.5 py-1 rounded-full font-semibold uppercase"></span>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-700 w-8 h-8 rounded-full hover:bg-gray-200 flex items-center justify-center transition">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content (Scrollable) -->
+            <div class="p-6 overflow-y-auto space-y-4 modal-body flex-grow">
+                <div class="flex flex-wrap items-center gap-4 text-xs text-gray-500 border-b border-gray-100 pb-3">
+                    <span><i class="far fa-calendar-alt text-brand-gold mr-1"></i> <span id="modal-date"></span></span>
+                    <span><i class="far fa-user text-brand-blue mr-1"></i> Tác giả: <span id="modal-author" class="font-medium text-gray-700"></span></span>
+                    <span><i class="far fa-eye text-emerald-600 mr-1"></i> Lượt xem: <span id="modal-views"></span></span>
+                </div>
+
+                <h3 id="modal-title" class="text-xl sm:text-2xl font-bold text-brand-blue leading-snug"></h3>
+                
+                <div class="rounded-xl overflow-hidden shadow-sm my-4">
+                    <img id="modal-image" src="" alt="Ảnh bài viết" class="w-full max-h-80 object-cover">
+                </div>
+
+                <div id="modal-content-body" class="text-sm text-gray-700 leading-relaxed space-y-3 font-normal">
+                    <!-- Article text here -->
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 border-t border-gray-100 bg-gray-50 shrink-0 flex justify-between items-center text-xs">
+                <span class="text-gray-500"><i class="fas fa-school text-brand-blue mr-1"></i> Trường PTNT TH & THCS Pà Vầy Sủ</span>
+                <button onclick="closeModal()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold px-4 py-2 rounded-lg transition">Đóng lại</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer-placeholder"></div>
+
+    <!-- TOAST NOTIFICATION BOX -->
+    <div id="toast-msg" class="fixed bottom-5 right-5 bg-gray-900 text-white px-4 py-3 rounded-xl shadow-2xl text-xs font-medium z-50 hidden flex items-center gap-2 border border-gray-700">
+        <i class="fas fa-check-circle text-emerald-400 text-base"></i>
+        <span id="toast-text">Thông báo thành công</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC & SAMPLE DATA -->
+    <script>
+        // Sample News Data Array
+        const sampleArticles = [
+            {
+                id: 1,
+                title: "Lễ Khai giảng năm học mới 2026 - 2027 đầy khí thế và tự hào tại Pà Vầy Sủ",
+                category: "su-kien",
+                categoryName: "Sự kiện nổi bật",
+                date: "05/09/2026",
+                author: "Ban BTP Nhà trường",
+                views: 1240,
+                featured: true,
+                image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80",
+                summary: "Hòa chung không khí hân hoan của hàng triệu học sinh cả nước, thầy và trò Trường PTNT TH & THCS Pà Vầy Sủ long trọng tổ chức Lễ khai giảng năm học mới với lời hứa thi đua Dạy tốt - Học tốt.",
+                content: `<p>Sáng ngày 05/09/2026, trong không khí trong lành của núi rừng Pà Vầy Sủ, Trường PTNT TH & THCS Pà Vầy Sủ đã trang trọng tổ chức Lễ Khai giảng năm học mới 2026 - 2027.</p>
+                <p>Đến dự buổi lễ có sự góp mặt của đại diện Phòng Giáo dục và Đào tạo, chính quyền địa phương cùng toàn thể 60 cán bộ giáo viên và hơn 1.000 em học sinh của hai cấp học.</p>
+                <p>Năm học mới này, nhà trường tiếp tục chú trọng đổi mới phương pháp giảng dạy, đẩy mạnh ứng dụng công nghệ thông tin và nâng cao chất lượng nuôi dưỡng học sinh bán trú vùng cao.</p>`
+            },
+            {
+                id: 2,
+                title: "Hội thi Giáo viên dạy giỏi cấp Trường chuyên đề Đổi mới phương pháp dạy học",
+                category: "chuyen-mon",
+                categoryName: "Hoạt động chuyên môn",
+                date: "12/10/2026",
+                author: "Tổ Chuyên Môn",
+                views: 850,
+                featured: false,
+                image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80",
+                summary: "Hội thi là cơ hội để các thầy cô giáo giao lưu, học hỏi và áp dụng các mô hình giảng dạy ứng dụng CNTT, mang đến những tiết học sinh động cho học sinh.",
+                content: `<p>Nhằm nâng cao năng lực chuyên môn nghiệp vụ cho đội ngũ nhà giáo, Ban Giám hiệu nhà trường đã phát động Hội thi Giáo viên dạy giỏi cấp Trường năm học 2026 - 2027.</p>
+                <p>Các tiết dạy đều thể hiện sự chuẩn bị chu đáo, ứng dụng công nghệ thông tin và các phương pháp dạy học tích cực, phát huy tính chủ động của học sinh.</p>`
+            },
+            {
+                id: 3,
+                title: "Hoạt động ngoại khóa: Tập huấn Kỹ năng sống & An toàn giao thông đường bộ",
+                category: "doan-doi",
+                categoryName: "Phong trào - Đoàn đội",
+                date: "10/10/2026",
+                author: "Đoàn Thanh Niên",
+                views: 620,
+                featured: false,
+                image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
+                summary: "Chương trình ngoại khóa bổ ích giúp học sinh vùng cao trang bị những kiến thức cơ bản về quy tắc an toàn giao thông và kỹ năng tự bảo vệ bản thân.",
+                content: `<p>Liên đội Trường PTNT TH & THCS Pà Vầy Sủ phối hợp cùng Công an địa phương tổ chức buổi tuyên truyền và tập huấn kỹ năng giao thông an toàn cho hơn 500 học sinh cấp THCS.</p>
+                <p>Buổi tập huấn diễn ra sôi nổi với các trò chơi đố vui có thưởng và thực hành đi xe đạp an toàn.</p>`
+            },
+            {
+                id: 4,
+                title: "Thông báo về việc tổ chức Khám sức khỏe định kỳ cho học sinh toàn trường",
+                category: "thong-bao",
+                categoryName: "Thông báo học đường",
+                date: "01/10/2026",
+                author: "Bộ phận Y tế",
+                views: 430,
+                featured: false,
+                image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
+                summary: "Nhà trường phối hợp với Trạm Y tế xã Pà Vầy Sủ tổ chức khám sức khỏe tổng quát định kỳ đầu năm học cho 100% học sinh từ Lớp 1 đến Lớp 9.",
+                content: `<p>Căn cứ kế hoạch chăm sóc sức khỏe học đường, Bộ phận Y tế trường xin thông báo lịch khám sức khỏe tổng quát năm học 2026 - 2027 cho học sinh.</p>
+                <p>Các nội dung khám bao gồm: Chiều cao, cân nặng, thị lực, tai mũi họng và kiểm tra nha học đường.</p>`
+            },
+            {
+                id: 5,
+                title: "Ngày hội Sách và Văn hóa đọc năm 2026: Lắng nghe trang sách - Mở rộng tương lai",
+                category: "su-kien",
+                categoryName: "Sự kiện nổi bật",
+                date: "25/09/2026",
+                author: "Thư viện Trường",
+                views: 980,
+                featured: false,
+                image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=80",
+                summary: "Ngày hội diễn ra nhiều hoạt động hấp dẫn như: Kể chuyện theo sách, Xếp sách nghệ thuật và Quyên góp sách xây dựng Tủ sách lớp học.",
+                content: `<p>Thư viện nhà trường đã tổ chức thành công "Ngày hội Sách và Văn hóa đọc". Sự kiện thu hút đông đảo giáo viên và học sinh hào hứng tham gia.</p>
+                <p>Nhiều mô hình xếp sách độc đáo phỏng theo kiến trúc mái trường và bản làng đã được trao giải cao.</p>`
+            },
+            {
+                id: 6,
+                title: "Lễ tiếp nhận tài trợ chương trình 'Thắp sáng ước mơ em' cho học sinh bán trú",
+                category: "su-kien",
+                categoryName: "Sự kiện nổi bật",
+                date: "18/09/2026",
+                author: "Ban BTP Nhà trường",
+                views: 1100,
+                featured: false,
+                image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80",
+                summary: "Nhà trường hân hạnh đón tiếp đoàn từ thiện trao tặng 100 suất học bổng cùng trang thiết bị học tập, áo ấm cho các em học sinh có hoàn cảnh khó khăn.",
+                content: `<p>Nhà trường vừa tổ chức tiếp nhận các phần quà ý nghĩa từ các nhà hảo tâm nhằm hỗ trợ đời sống và sinh hoạt cho các em học sinh bán trú nhân dịp đầu năm học mới.</p>`
+            },
+            {
+                id: 7,
+                title: "Sinh hoạt chuyên đề: Ứng dụng STEM trong dạy học Khoa học tự nhiên",
+                category: "chuyen-mon",
+                categoryName: "Hoạt động chuyên môn",
+                date: "10/09/2026",
+                author: "Tổ KHTN",
+                views: 510,
+                featured: false,
+                image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80",
+                summary: "Tổ Khoa học tự nhiên thực hiện thành công sinh hoạt chuyên đề giáo dục STEM cấp trường với chủ đề Chế tạo mô hình học tập tự chọn.",
+                content: `<p>Các em học sinh THCS đã tự tay thiết kế và tạo ra nhiều sản phẩm STEM độc đáo từ vật liệu tái chế dưới sự hướng dẫn nhiệt tình của các thầy cô giáo.</p>`
+            }
+        ];
+
+        // State Variables
+        let currentArticles = [...sampleArticles];
+        let selectedCategory = 'all';
+        let searchQuery = '';
+        let currentPage = 1;
+        const itemsPerPage = 4;
+
+        // Initialize Webpage Logic
+        window.onload = function() {
+            renderPage();
+            setupSearchListeners();
+        };
+
+        // Render Page Main Controller
+        function renderPage() {
+            filterArticles();
+            renderSpotlight();
+            renderNewsCards();
+            renderTrendingList();
+            renderPagination();
+        }
+
+        // Filter Logic
+        function filterArticles() {
+            currentArticles = sampleArticles.filter(item => {
+                const matchCat = (selectedCategory === 'all') || (item.category === selectedCategory);
+                const matchQuery = (item.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
+                                   (item.summary.toLowerCase().includes(searchQuery.toLowerCase()));
+                return matchCat && matchQuery;
+            });
+
+            document.getElementById('news-count').innerText = currentArticles.length;
+        }
+
+        // Category Switch Handler
+        function filterCategory(catKey) {
+            selectedCategory = catKey;
+            currentPage = 1;
+
+            // Update Active Buttons Visuals
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.getAttribute('data-cat') === catKey) {
+                    btn.className = "cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition bg-brand-blue text-white shadow-sm";
+                } else {
+                    btn.className = "cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition text-gray-600 bg-gray-100 hover:bg-gray-200";
+                }
+            });
+
+            renderPage();
+        }
+
+        // Search Input Listeners Setup
+        function setupSearchListeners() {
+            const filterInput = document.getElementById('filter-search-input');
+            const headerInput = document.getElementById('header-search-input');
+            const mobileInput = document.getElementById('mobile-search-input');
+
+            const handleSearch = (e) => {
+                searchQuery = e.target.value.trim();
+                currentPage = 1;
+                renderPage();
+            };
+
+            if (filterInput) filterInput.addEventListener('input', handleSearch);
+            if (headerInput) headerInput.addEventListener('input', (e) => {
+                filterInput.value = e.target.value;
+                handleSearch(e);
+            });
+            if (mobileInput) mobileInput.addEventListener('input', (e) => {
+                filterInput.value = e.target.value;
+                handleSearch(e);
+            });
+        }
+
+        // Render Spotlight (Top Highlight Article)
+        function renderSpotlight() {
+            const spotlightContainer = document.getElementById('spotlight-section');
+            const featuredArticle = sampleArticles.find(a => a.featured) || sampleArticles[0];
+
+            if (!spotlightContainer) return;
+
+            // Hide Spotlight if searching or filtering specifically
+            if (selectedCategory !== 'all' || searchQuery !== '') {
+                spotlightContainer.classList.add('hidden');
+                return;
+            }
+            spotlightContainer.classList.remove('hidden');
+
+            spotlightContainer.innerHTML = `
+                <div class="lg:flex">
+                    <div class="lg:w-7/12 relative overflow-hidden group cursor-pointer" onclick="openModal(${featuredArticle.id})">
+                        <img src="${featuredArticle.image}" alt="${featuredArticle.title}" class="w-full h-64 sm:h-80 lg:h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-4 left-4 bg-brand-red text-white text-xs font-bold px-3 py-1 rounded-full shadow uppercase">
+                            <i class="fas fa-star mr-1"></i> Nổi bật nhất
+                        </span>
+                    </div>
+                    <div class="lg:w-5/12 p-6 sm:p-8 flex flex-col justify-between bg-white">
+                        <div>
+                            <div class="flex items-center gap-3 text-xs text-gray-500 mb-3">
+                                <span class="bg-blue-100 text-brand-blue font-semibold px-2.5 py-0.5 rounded-md">${featuredArticle.categoryName}</span>
+                                <span><i class="far fa-calendar-alt text-brand-gold"></i> ${featuredArticle.date}</span>
+                            </div>
+                            <h3 onclick="openModal(${featuredArticle.id})" class="text-xl sm:text-2xl font-bold text-brand-blue hover:text-brand-lightBlue transition cursor-pointer leading-snug mb-3">
+                                ${featuredArticle.title}
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed line-clamp-4">
+                                ${featuredArticle.summary}
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-xs text-gray-400"><i class="far fa-eye text-emerald-600"></i> ${featuredArticle.views} lượt xem</span>
+                            <button onclick="openModal(${featuredArticle.id})" class="bg-brand-blue hover:bg-brand-lightBlue text-white text-xs font-bold px-4 py-2 rounded-xl shadow transition inline-flex items-center gap-1">
+                                Đọc chi tiết <i class="fas fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render News Grid with Pagination
+        function renderNewsCards() {
+            const grid = document.getElementById('news-grid');
+            const noResults = document.getElementById('no-results');
+
+            if (currentArticles.length === 0) {
+                grid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            // Paginate Slice
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const paginatedItems = currentArticles.slice(startIndex, startIndex + itemsPerPage);
+
+            grid.innerHTML = paginatedItems.map(item => `
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between hover:shadow-md transition duration-300 group">
+                    <div>
+                        <div class="relative overflow-hidden h-48 cursor-pointer" onclick="openModal(${item.id})">
+                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 left-3 bg-brand-blue/90 backdrop-blur-sm text-white text-[11px] font-medium px-2.5 py-1 rounded-lg">
+                                ${item.categoryName}
+                            </span>
+                        </div>
+                        <div class="p-4 sm:p-5">
+                            <div class="flex items-center gap-2 text-[11px] text-gray-400 mb-2">
+                                <span><i class="far fa-calendar-alt"></i> ${item.date}</span>
+                                <span>•</span>
+                                <span><i class="far fa-user"></i> ${item.author}</span>
+                            </div>
+                            <h4 onclick="openModal(${item.id})" class="font-bold text-gray-800 text-base line-clamp-2 hover:text-brand-blue cursor-pointer transition leading-snug">
+                                ${item.title}
+                            </h4>
+                            <p class="text-xs text-gray-600 mt-2 line-clamp-3 leading-relaxed">
+                                ${item.summary}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-4 sm:px-5 pb-4 pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+                        <span class="text-gray-400"><i class="far fa-eye text-emerald-600"></i> ${item.views}</span>
+                        <button onclick="openModal(${item.id})" class="text-brand-blue font-bold hover:text-brand-red transition inline-flex items-center gap-1">
+                            Xem tiếp <i class="fas fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('current-page-num').innerText = currentPage;
+        }
+
+        // Render Trending Sidebar Widget
+        function renderTrendingList() {
+            const container = document.getElementById('trending-list');
+            const sortedByViews = [...sampleArticles].sort((a, b) => b.views - a.views).slice(0, 4);
+
+            container.innerHTML = sortedByViews.map((item, idx) => `
+                <div class="pt-3 first:pt-0 flex items-start gap-3 cursor-pointer group" onclick="openModal(${item.id})">
+                    <span class="font-black text-lg ${idx === 0 ? 'text-brand-red' : 'text-gray-300'} w-4 shrink-0">
+                        0${idx + 1}
+                    </span>
+                    <div>
+                        <h5 class="text-xs font-bold text-gray-800 group-hover:text-brand-blue transition line-clamp-2 leading-snug">
+                            ${item.title}
+                        </h5>
+                        <div class="flex items-center gap-2 text-[10px] text-gray-400 mt-1">
+                            <span><i class="far fa-calendar-alt"></i> ${item.date}</span>
+                            <span><i class="far fa-eye"></i> ${item.views}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Pagination Control Buttons
+        function renderPagination() {
+            const container = document.getElementById('pagination-container');
+            const totalPages = Math.ceil(currentArticles.length / itemsPerPage);
+
+            if (totalPages <= 1) {
+                container.innerHTML = '';
+                return;
+            }
+
+            let html = `
+                <button onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled class="opacity-40 cursor-not-allowed px-3 py-1.5 rounded-lg border text-xs bg-gray-100"' : 'class="px-3 py-1.5 rounded-lg border border-gray-300 text-xs bg-white hover:bg-gray-100 transition"'}>
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            `;
+
+            for (let i = 1; i <= totalPages; i++) {
+                html += `
+                    <button onclick="changePage(${i})" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition ${i === currentPage ? 'bg-brand-blue text-white' : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-100'}">
+                        ${i}
+                    </button>
+                `;
+            }
+
+            html += `
+                <button onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled class="opacity-40 cursor-not-allowed px-3 py-1.5 rounded-lg border text-xs bg-gray-100"' : 'class="px-3 py-1.5 rounded-lg border border-gray-300 text-xs bg-white hover:bg-gray-100 transition"'}>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // Change Page Handler
+        function changePage(page) {
+            const totalPages = Math.ceil(currentArticles.length / itemsPerPage);
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderNewsCards();
+            renderPagination();
+            window.scrollTo({ top: 400, behavior: 'smooth' });
+        }
+
+        // Reset All Filters
+        function resetFilters() {
+            selectedCategory = 'all';
+            searchQuery = '';
+            document.getElementById('filter-search-input').value = '';
+            filterCategory('all');
+        }
+
+        // Quick View Modal Logic
+        function openModal(articleId) {
+            const article = sampleArticles.find(a => a.id === articleId);
+            if (!article) return;
+
+            document.getElementById('modal-category').innerText = article.categoryName;
+            document.getElementById('modal-date').innerText = article.date;
+            document.getElementById('modal-author').innerText = article.author;
+            document.getElementById('modal-views').innerText = article.views;
+            document.getElementById('modal-title').innerText = article.title;
+            document.getElementById('modal-image').src = article.image;
+            document.getElementById('modal-content-body').innerHTML = article.content + `<p>${article.summary}</p>`;
+
+            const modal = document.getElementById('article-modal');
+            const modalContainer = document.getElementById('modal-card');
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalContainer.classList.remove('scale-95');
+            modalContainer.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('article-modal');
+            const modalContainer = document.getElementById('modal-card');
+
+            modalContainer.classList.remove('scale-100');
+            modalContainer.classList.add('scale-95');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on outside click
+        document.getElementById('article-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Mobile Menu Toggles
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-dropdown button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const subMenu = btn.nextElementSibling;
+                subMenu.classList.toggle('hidden');
+            });
+        });
+
+        // Newsletter Submit Toast
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('sidebar-email');
+            if (emailInput.value) {
+                showCustomToast('Cảm ơn bạn đã đăng ký nhận tin tức!');
+                emailInput.value = '';
+            }
+        }
+
+        function showCustomToast(msg) {
+            const toast = document.getElementById('toast-msg');
+            const text = document.getElementById('toast-text');
+            text.innerText = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+    </script>
+    <script src="components/header.js"></script>
+    <script src="components/footer.js"></script>
+</body>
+</html>
